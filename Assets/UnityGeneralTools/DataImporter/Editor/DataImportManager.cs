@@ -141,7 +141,7 @@ namespace DataImporter
             }
 
             string folderPath = !string.IsNullOrEmpty(exportPath) ?
-                                $"Assets/{exportPath}" :
+                                $"{exportPath}" :
                                 $"Assets";
             if (!Directory.Exists(folderPath))
             {
