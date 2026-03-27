@@ -1,0 +1,11 @@
+{
+  "name": "com/game41975/UnityGeneralTools",
+  "displayName": "GeneralUnityTools",
+  "version": "0.1.0",
+  "unity": "6000.3.11",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "category": "",
+  "dependencies": {}
+}
