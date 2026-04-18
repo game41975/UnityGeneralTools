@@ -1,24 +1,17 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
+using System.IO;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 namespace DataImporter
 {
-    public class ScriptableObjectBase : ScriptableObject
+    public class DataImportSupport
     {
-        //public abstract void InitParam<T>(T param) where T : ScriptableObjectParameterBase;
-        public virtual void InitParam(List<List<string>> list)
-        {
-        }
-
-        public virtual void InitParam(int rowCount,int columnCount, string[] dataArray)
-        {
-        }
-
-        public bool ConvertParam<T>(string key, System.Action<T> action)
+        public static bool ConvertParam<T>(string key, System.Action<T> action)
         {
             bool convertSuccessed = false;
             var type = typeof(T);
@@ -68,11 +61,27 @@ namespace DataImporter
 
             return convertSuccessed;
         }
-    }
 
-    [System.Serializable]
-    public class ScriptableObjectParameterBase
-    {
+        public static List<List<string>> LoadCsv(string path)
+        {
+            List<List<string>> csvParamList = new List<List<string>>();
+
+            StreamReader reader = new StreamReader(path);
+            if (!reader.IsUnityNull())
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+                    csvParamList.Add(new List<string>());
+                    foreach(var value in values)
+                    {
+                        csvParamList[csvParamList.Count - 1].Add(value);
+                    }
+                }
+            }
+
+            return csvParamList;
+        }
     }
 }
-

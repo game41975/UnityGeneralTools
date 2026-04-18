@@ -1,5 +1,9 @@
-﻿using UnityEditor;
+﻿using System.Collections;
+using Unity.EditorCoroutines.Editor;
+using UnityEditor.Callbacks;
+using UnityEditor;
 using UnityEngine;
+using System.IO;
 
 namespace DataImporter
 { 
@@ -22,7 +26,22 @@ namespace DataImporter
         {
             if (GUILayout.Button("読み込むエクセルファイルを選択"))
             {
+                var tempFilePath = excelFilePath;
                 excelFilePath = EditorUtility.OpenFilePanel("SelectFile", "", "xlsx,xlsm");
+                if (!string.IsNullOrEmpty(excelFilePath))
+                {
+                    //エクセルのファイル名をスクリプト名の初期値として設定
+                    scriptName = Path.GetFileNameWithoutExtension(excelFilePath);
+                }
+                else
+                {
+                    //ファイル選択をキャンセルした場合、前回で選択した情報があれば再度設定する
+                    if (!string.IsNullOrEmpty(tempFilePath))
+                    {
+                        excelFilePath = tempFilePath;
+                    }
+                }
+
             }
             GUI.enabled = false;
             EditorGUILayout.TextField("エクセルファイルパス", excelFilePath);
@@ -68,6 +87,7 @@ namespace DataImporter
                 //    return;
                 //}
 
+                //this.StartCoroutine(ImportFileAsync());
                 DataImportManager.Import(excelFilePath, scriptName, exportSOPath);
             }
         }
