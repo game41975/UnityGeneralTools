@@ -15,7 +15,6 @@ using System.Reflection;
 using System.Security.AccessControl;
 using System.Text;
 using TMPro.EditorUtilities;
-using Unity.EditorCoroutines.Editor;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Callbacks;
