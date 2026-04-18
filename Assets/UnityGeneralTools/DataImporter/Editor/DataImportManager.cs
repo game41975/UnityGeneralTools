@@ -393,8 +393,9 @@ namespace DataImporter
         }
 
         [DidReloadScripts]
-        private static void Hoge()
+        private static void CheckExportSO()
         {
+            //ScriptableObject生成に必要な情報がそろっているかチェック
             if (!string.IsNullOrEmpty(TempExportData.instance.soClassName) &&
                 !string.IsNullOrEmpty(TempExportData.instance.objectName) 
                 /*&& !string.IsNullOrEmpty(TempExportData.instance.exportPath)*/)
@@ -405,7 +406,7 @@ namespace DataImporter
                          TempExportData.instance.dataColumnCount,
                          TempExportData.instance.dataArray,
                          TempExportData.instance.exportPath);
-
+                
                 TempExportData.instance.InitParams();
             }
         } 
@@ -419,8 +420,11 @@ namespace DataImporter
 
         public int dataRowCount;
         public int dataColumnCount;
-        public string[] dataArray; 
+        public string[] dataArray;
 
+        /// <summary>
+        /// 情報初期化
+        /// </summary>
         public void InitParams()
         {
             soClassName = string.Empty;
