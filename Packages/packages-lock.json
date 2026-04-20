@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.akatukigame.unitygeneraltools": {
+      "version": "file:com.akatukigame.unitygeneraltools",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.addressables": {
       "version": "2.9.1",
       "depth": 0,
